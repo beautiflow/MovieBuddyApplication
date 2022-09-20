@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 public class MovieFinder {
 
+    private MovieReader movieReader = new CsvMovieReader();
 
     /**
      * 저장된 영화 목록에서 감독으로 영화를 검색한다.
@@ -26,7 +27,8 @@ public class MovieFinder {
      * @return 검색된 영화 목록
      */
     public List<Movie> directedBy(String directedBy) {
-        return loadMovies().stream()
+        return movieReader.loadMovies()
+                .stream()
                 .filter(it -> it.getDirector().toLowerCase().contains(directedBy.toLowerCase()))
                 .collect(Collectors.toList());
     }
@@ -38,49 +40,21 @@ public class MovieFinder {
      * @return 검색된 영화 목록
      */
     public List<Movie> releasedYearBy(int releasedYearBy) {
-        return loadMovies().stream()
+        return movieReader.loadMovies()
+                .stream()
                 .filter(it -> Objects.equals(it.getReleaseYear(), releasedYearBy))
                 .collect(Collectors.toList());
     }
 
-    /**
-     * 영화 메타데이터를 읽어 저장된 영화 목록을 불러온다.
-     *
-     * @return 불러온 영화 목록
-     */
-    public List<Movie> loadMovies() {
-        try {
-            final URI resourceUri = ClassLoader.getSystemResource("movie_metadata.csv").toURI();
-            final Path data = Path.of(FileSystemUtils.checkFileSystem(resourceUri));
-            final Function<String, Movie> mapCsv = csv -> {
-                try {
-                    // split with comma
-                    String[] values = csv.split(",");
-
-                    String title = values[0];
-                    List<String> genres = Arrays.asList(values[1].split("\\|"));
-                    String language = values[2].trim();
-                    String country = values[3].trim();
-                    int releaseYear = Integer.valueOf(values[4].trim());
-                    String director = values[5].trim();
-                    List<String> actors = Arrays.asList(values[6].split("\\|"));
-                    URL imdbLink = new URL(values[7].trim());
-                    String watchedDate = values[8];
-
-                    return Movie.of(title, genres, language, country, releaseYear, director, actors, imdbLink, watchedDate);
-                } catch (IOException error) {
-                    throw new ApplicationException("mapping csv to object failed.", error);
-                }
-            };
-
-            return Files.readAllLines(data, StandardCharsets.UTF_8)
-                    .stream()
-                    .skip(1)
-                    .map(mapCsv)
-                    .collect(Collectors.toList());
-        } catch (IOException | URISyntaxException error) {
-            throw new ApplicationException("failed to load movies data.", error);
-        }
-    }
-
 }
+
+
+// MovieFinder 클래스를 천천히 다시 한번 살펴보면 MovieBuddyApplication 클래스의 첫 번째 버전과 동일하게 두 가지 관심사가 섞여있다는 것을 알 수 있다.
+
+// MovieFinder 의 두 가지 관심사
+// 첫번째, CSV 파일로 작성된 영화 메타데이터를 읽어들인다.
+// 두번째, 조건에 맞는 영화를 검색한다.
+
+// 이번에는 객체지향 개념 중 상속과 다형성을 이용해서 문제를 해결해보자.
+// 두 개념의 기저에는 추상화라고 하는 원리가 숨겨져 있다. 추상화라는 것은 어떤 것들의 공통적인 성격을 뽑아내서 이를 따로 분리해내는 작업을 의미
+
