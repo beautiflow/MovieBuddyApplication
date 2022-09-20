@@ -22,6 +22,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import moviebuddy.domain.Movie;
+import moviebuddy.domain.MovieFinder;
 import moviebuddy.util.FileSystemUtils;
 
 /**
@@ -43,6 +45,8 @@ public class MovieBuddyApplication {
      */
 
     public void run(String[] args) throws Exception {
+        final MovieFinder movieFinder = new MovieFinder();
+
         final AtomicBoolean running = new AtomicBoolean(true);  // running 은 애플리케이션의 동작을 제어하는 플래그이다.
         final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));  // input 은 사용자가 입력한 명령어를 캐치하는 곳
         final PrintWriter output = new PrintWriter(System.out, false);  // output  사용자의 명령 및 사용자가 입력한 명령을 수행할 결과를 출력하기 위한 곳
@@ -62,7 +66,7 @@ public class MovieBuddyApplication {
             if (director.isBlank()) {
                 throw new ApplicationException.InvalidCommandArgumentsException();
             }
-            List<Movie> moviesDirectedBy = directedBy(director);
+            List<Movie> moviesDirectedBy = movieFinder.directedBy(director);
             AtomicInteger counter = new AtomicInteger(1);
 
             output.println(String.format("find for movies by %s.", director));
@@ -80,7 +84,7 @@ public class MovieBuddyApplication {
             } catch (IndexOutOfBoundsException | NumberFormatException error) {
                 throw new ApplicationException.InvalidCommandArgumentsException(error);
             }
-            List<Movie> moviesReleasedYearBy = releasedYearBy(releaseYear);
+            List<Movie> moviesReleasedYearBy = movieFinder.releasedYearBy(releaseYear);
             AtomicInteger counter = new AtomicInteger(1);
 
             output.println(String.format("find for movies from %s year.", releaseYear));
@@ -124,70 +128,6 @@ public class MovieBuddyApplication {
     }
 
     /**
-     * 저장된 영화 목록에서 감독으로 영화를 검색한다.
-     * 
-     * @param directedBy 감독
-     * @return 검색된 영화 목록
-     */
-    public List<Movie> directedBy(String directedBy) {
-        return loadMovies().stream()
-                           .filter(it -> it.getDirector().toLowerCase().contains(directedBy.toLowerCase()))
-                           .collect(Collectors.toList());
-    }
-
-    /**
-     * 저장된 영화 목록에서 개봉년도로 영화를 검색한다.
-     * 
-     * @param releasedYearBy
-     * @return 검색된 영화 목록
-     */
-    public List<Movie> releasedYearBy(int releasedYearBy) {
-        return loadMovies().stream()
-                           .filter(it -> Objects.equals(it.getReleaseYear(), releasedYearBy))
-                           .collect(Collectors.toList());
-    }
-
-    /**
-     * 영화 메타데이터를 읽어 저장된 영화 목록을 불러온다.
-     * 
-     * @return 불러온 영화 목록
-     */
-    public List<Movie> loadMovies() {
-        try {
-            final URI resourceUri = ClassLoader.getSystemResource("movie_metadata.csv").toURI();
-            final Path data = Path.of(FileSystemUtils.checkFileSystem(resourceUri));
-            final Function<String, Movie> mapCsv = csv -> {
-                try {
-                    // split with comma
-                    String[] values = csv.split(",");
-
-                    String title = values[0];
-                    List<String> genres = Arrays.asList(values[1].split("\\|"));
-                    String language = values[2].trim();
-                    String country = values[3].trim();
-                    int releaseYear = Integer.valueOf(values[4].trim());
-                    String director = values[5].trim();
-                    List<String> actors = Arrays.asList(values[6].split("\\|"));
-                    URL imdbLink = new URL(values[7].trim());
-                    String watchedDate = values[8];
-
-                    return Movie.of(title, genres, language, country, releaseYear, director, actors, imdbLink, watchedDate);
-                } catch (IOException error) {
-                    throw new ApplicationException("mapping csv to object failed.", error);
-                }
-            };
-
-            return Files.readAllLines(data, StandardCharsets.UTF_8)
-                        .stream()
-                        .skip(1)
-                        .map(mapCsv)
-                        .collect(Collectors.toList());
-        } catch (IOException | URISyntaxException error) {
-            throw new ApplicationException("failed to load movies data.", error);
-        }
-    }
-
-    /**
      * 사용자 명령어 정의
      */
     enum Command {
@@ -204,3 +144,6 @@ public class MovieBuddyApplication {
     }
 
 }
+
+// MovieBuddyApplication 클래스는 사용자 입력을 받아들이고 그걸 통해서 명령을 수행하고 결과를 출력하는 것에 대한 관심사만 남고 CSV 파일로 작성된 영화 데이터를 읽어 들인 후
+// 영화를 검색하는 것은 MovieFinder 클래스로 관심사가 옯겨갔다.
