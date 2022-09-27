@@ -13,6 +13,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import moviebuddy.domain.CsvMovieReader;
 import moviebuddy.domain.Movie;
 import moviebuddy.domain.MovieFinder;
 
@@ -35,7 +36,7 @@ public class MovieBuddyApplication {
      */
 
     public void run(String[] args) throws Exception {
-        final MovieFinder movieFinder = new MovieFinder();
+        final MovieFinder movieFinder = new MovieFinder(new CsvMovieReader());
 
         final AtomicBoolean running = new AtomicBoolean(true);  // running 은 애플리케이션의 동작을 제어하는 플래그이다.
         final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));  // input 은 사용자가 입력한 명령어를 캐치하는 곳

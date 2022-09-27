@@ -18,7 +18,11 @@ import java.util.stream.Collectors;
 
 public class MovieFinder {
 
-    private MovieReader movieReader = new CsvMovieReader();
+    private final MovieReader movieReader;
+
+    public MovieFinder(MovieReader movieReader){ // 생성자를 통해 외부에서 입력받도록 변경! MovieReader 를 외부에서 주입받아 유지하도록 함
+        this.movieReader = Objects.requireNonNull(movieReader);  // MovieReader 는 반드시 필요한 객체이니만큼 object util 을 이용해서 반드시 있어야 한다고 requireNonnull 메소드를 사용 , final 키워드를 이용해서 객체가 생성되는 시점에 받을 수 있도록 설정
+    }
 
     /**
      * 저장된 영화 목록에서 감독으로 영화를 검색한다.
