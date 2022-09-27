@@ -1,5 +1,6 @@
 package moviebuddy.domain;
 
+import moviebuddy.MovieBuddyFactory;
 import moviebuddy.domain.Movie;
 import moviebuddy.domain.MovieFinder;
 
@@ -11,7 +12,8 @@ import java.util.List;
 public class MovieFinderTest {
 
 	public static void main(String[] args) {
-		MovieFinder movieFinder = new MovieFinder(new CsvMovieReader());
+		MovieBuddyFactory movieBuddyFactory = new MovieBuddyFactory();
+		MovieFinder movieFinder = movieBuddyFactory.movieFinder();
 		
 		List<Movie> result = movieFinder.directedBy("Michael Bay");
 		assertEquals(3, result.size());

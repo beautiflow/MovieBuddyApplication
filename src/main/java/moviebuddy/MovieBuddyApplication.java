@@ -36,7 +36,8 @@ public class MovieBuddyApplication {
      */
 
     public void run(String[] args) throws Exception {
-        final MovieFinder movieFinder = new MovieFinder(new CsvMovieReader());
+        final MovieBuddyFactory movieBuddyFactory = new MovieBuddyFactory();
+        final MovieFinder movieFinder = movieBuddyFactory.movieFinder();
 
         final AtomicBoolean running = new AtomicBoolean(true);  // running 은 애플리케이션의 동작을 제어하는 플래그이다.
         final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));  // input 은 사용자가 입력한 명령어를 캐치하는 곳
