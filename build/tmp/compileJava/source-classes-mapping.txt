@@ -17,8 +17,8 @@ moviebuddy/domain/CsvMovieReader.java
  moviebuddy.domain.CsvMovieReader
 moviebuddy/domain/MovieFinder.java
  moviebuddy.domain.MovieFinder
+moviebuddy/MovieBuddyFactory.java
+ moviebuddy.MovieBuddyFactory
 moviebuddy/MovieBuddyApplication.java
  moviebuddy.MovieBuddyApplication
  moviebuddy.MovieBuddyApplication$Command
-moviebuddy/MovieBuddyFactory.java
- moviebuddy.MovieBuddyFactory

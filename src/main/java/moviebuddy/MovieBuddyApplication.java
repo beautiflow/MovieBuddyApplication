@@ -16,6 +16,8 @@ import java.util.stream.Stream;
 import moviebuddy.domain.CsvMovieReader;
 import moviebuddy.domain.Movie;
 import moviebuddy.domain.MovieFinder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  * @author springrunner.kr@gmail.com
@@ -36,8 +38,8 @@ public class MovieBuddyApplication {
      */
 
     public void run(String[] args) throws Exception {
-        final MovieBuddyFactory movieBuddyFactory = new MovieBuddyFactory();
-        final MovieFinder movieFinder = movieBuddyFactory.movieFinder();
+        final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MovieBuddyFactory.class);
+        final MovieFinder movieFinder = applicationContext.getBean(MovieFinder.class);
 
         final AtomicBoolean running = new AtomicBoolean(true);  // running 은 애플리케이션의 동작을 제어하는 플래그이다.
         final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));  // input 은 사용자가 입력한 명령어를 캐치하는 곳

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="moviebuddy.domain.MovieFinderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-09-28T06:20:49" hostname="beautiflowui-MacBookAir.local" time="0.127">
+  <properties/>
+  <testcase name="NotEmpty_RealeasedYearBy()" classname="moviebuddy.domain.MovieFinderTest" time="0.127"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

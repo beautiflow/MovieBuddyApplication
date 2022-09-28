@@ -223,6 +223,8 @@ Q. 의존하고 있다는 것은 무슨 의미?
 
 
 (2) 애플이케이션 컨텍스트로 애플리케이션 구성하기
+AnnotationConfigApplicationContext 를 통해서 application context 를 생성했고 해당 application context 를 통해서 빈을 취득해서 동작하도록 변경
 
-
+@Configuration 과 @Bean 을 이용해 MovieBuddyFactory 를 빈 구성정보로 만들고 Spring 의 IoC 컨테이너인 애플리케이션 컨텍스트가 MovieFinder 와 MovieReader 객체를 생성하고 관리하도록 코드를 변경함
+몇 줄의 코드만으로 SpringApplication 으로 변경됨.
 
