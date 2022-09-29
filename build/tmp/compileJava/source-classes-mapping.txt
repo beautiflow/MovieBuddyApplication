@@ -13,6 +13,8 @@ moviebuddy/domain/MovieReader.java
  moviebuddy.domain.MovieReader
 moviebuddy/MovieBuddyProfile.java
  moviebuddy.MovieBuddyProfile
+moviebuddy/domain/MovieFinder.java
+ moviebuddy.domain.MovieFinder
 moviebuddy/data/JaxbMovieReader.java
  moviebuddy.data.JaxbMovieReader
  moviebuddy.data.JaxbMovieReader$MovieData
@@ -20,8 +22,6 @@ moviebuddy/data/JaxbMovieReader.java
 moviebuddy/MovieBuddyApplication.java
  moviebuddy.MovieBuddyApplication
  moviebuddy.MovieBuddyApplication$Command
-moviebuddy/domain/MovieFinder.java
- moviebuddy.domain.MovieFinder
 moviebuddy/MovieBuddyFactory.java
  moviebuddy.MovieBuddyFactory
  moviebuddy.MovieBuddyFactory$DataSourceModuleConfig
