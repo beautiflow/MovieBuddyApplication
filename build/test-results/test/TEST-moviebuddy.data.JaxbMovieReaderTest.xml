@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="moviebuddy.domain.JaxbMovieReaderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-09-29T02:13:23" hostname="beautiflowui-MacBookAir.local" time="0.472">
+<testsuite name="moviebuddy.data.JaxbMovieReaderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-09-29T05:12:30" hostname="beautiflowui-MacBookAir.local" time="0.504">
   <properties/>
-  <testcase name="NotEmpty_LoadedMovies()" classname="moviebuddy.domain.JaxbMovieReaderTest" time="0.472"/>
+  <testcase name="NotEmpty_LoadedMovies()" classname="moviebuddy.data.JaxbMovieReaderTest" time="0.504"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[9월 29, 2022 11:13:23 오전 org.springframework.test.context.support.AbstractTestContextBootstrapper getDefaultTestExecutionListenerClassNames
+  <system-err><![CDATA[9월 29, 2022 2:12:30 오후 org.springframework.test.context.support.AbstractTestContextBootstrapper getDefaultTestExecutionListenerClassNames
 INFO: Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
-9월 29, 2022 11:13:23 오전 org.springframework.test.context.support.AbstractTestContextBootstrapper getTestExecutionListeners
+9월 29, 2022 2:12:30 오후 org.springframework.test.context.support.AbstractTestContextBootstrapper getTestExecutionListeners
 INFO: Using TestExecutionListeners: [org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@72256d86, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@5ec65582, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@2a8ca847, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5d08795e, org.springframework.test.context.event.EventPublishingTestExecutionListener@4186624]
 ]]></system-err>
 </testsuite>
