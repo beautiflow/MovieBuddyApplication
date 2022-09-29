@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="moviebuddy.domain.MovieFinderTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-09-29T00:52:05" hostname="beautiflowui-MacBookAir.local" time="0.219">
+<testsuite name="moviebuddy.domain.MovieFinderTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-09-29T01:42:43" hostname="beautiflowui-MacBookAir.local" time="0.662">
   <properties/>
-  <testcase name="NotEmpty_directedBy()" classname="moviebuddy.domain.MovieFinderTest" time="0.136"/>
-  <testcase name="NotEmpty_RealeasedYearBy()" classname="moviebuddy.domain.MovieFinderTest" time="0.047"/>
+  <testcase name="NotEmpty_directedBy()" classname="moviebuddy.domain.MovieFinderTest" time="0.518"/>
+  <testcase name="NotEmpty_RealeasedYearBy()" classname="moviebuddy.domain.MovieFinderTest" time="0.094"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

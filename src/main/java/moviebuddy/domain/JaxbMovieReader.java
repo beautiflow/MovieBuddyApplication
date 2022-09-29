@@ -14,8 +14,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import moviebuddy.ApplicationException;
+import org.springframework.stereotype.Repository;
 
 // xml 문서에 매핑될 수 있는 자바 객체 구성하기
+@Repository
 public class  JaxbMovieReader implements MovieReader {
 
     @Override
